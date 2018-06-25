@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import { Provider } from 'react-redux';
-import { showPreloader, showAlert } from 'framework7-redux';
+import { navigateTo, showPreloader, showAlert } from 'framework7-redux';
 
 import { store, framework7StateKernel } from '../store';
 
@@ -24,8 +24,8 @@ const LeftPanel = (props, context) => (
 					</ContentBlock>
 					<ContentBlockTitle>Load page in panel</ContentBlockTitle>
 					<List>
-						<ListItem link="/about/" title="About"></ListItem>
-						<ListItem link="/form/" title="Form"></ListItem>
+						<ListItem onClick={() => store.dispatch(navigateTo('/about/'))} title="About"></ListItem>
+						<ListItem onClick={() => store.dispatch(navigateTo('/about/'))} title="Form"></ListItem>
 					</List>
 					<ContentBlockTitle>Load page in main view</ContentBlockTitle>
 					<List>

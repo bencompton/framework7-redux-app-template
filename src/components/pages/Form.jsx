@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import {Page, Navbar, ContentBlockTitle, List, ListItem, FormLabel, FormInput, Button, GridCol, GridRow, ContentBlock, ButtonsSegmented} from 'framework7-react';
+import { goBack } from 'framework7-redux';
+
+import { store } from '../../store';
 
 const onChangeHandler = (event) => {
     console.log('change');
@@ -27,7 +30,7 @@ export class Form extends Component {
     render() {
         return (
             <Page>
-                <Navbar backLink="Back" title="Forms" sliding />
+                <Navbar backLink="Back" title="Forms" sliding onBackClick={() => store.dispatch(goBack())} />
 
                 <ContentBlockTitle>Form</ContentBlockTitle>
                 <List form>
