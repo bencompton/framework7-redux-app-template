@@ -1,203 +1,100 @@
-import React, {PropTypes} from 'react';
-import { Provider } from 'react-redux';
-import { navigateTo, showPreloader, showAlert } from 'framework7-redux';
-
-import { store, framework7StateKernel } from '../store';
-
+import React from 'react';
+import { Provider } from 'react-redux'
 import {
-	Framework7App, Statusbar, Panel, View, Navbar, Pages, Page, ContentBlock, ContentBlockTitle, 
-	List, ListItem, Views, NavLeft, Link, NavCenter, NavRight, GridRow, GridCol, Button, Popup,
-	LoginScreen, LoginScreenTitle, ListButton, ListLabel, FormLabel, FormInput
+  App,
+  Panel,
+  View,
+  Statusbar,
+  Popup,
+  Page,
+  Navbar,
+  NavRight,
+  Link,
+  Block,
+  LoginScreen,
+  LoginScreenTitle,
+  List,
+  ListItem,
+  Label,
+  Input,
+  ListButton,
+  BlockFooter
 } from 'framework7-react';
 
-import {routes} from '../routes';
+import routes from '../routes';
+import { store, stateKernel } from '../store';
 
-const LeftPanel = (props, context) => (
-	<Panel left reveal layout="dark">
-		<View id="left-panel-view" navbarThrough dynamicNavbar="true">
-			{context.framework7AppContext.theme.ios ? <Navbar title="Left Panel"></Navbar> : null}
-			<Pages>
-				<Page>
-					{context.framework7AppContext.theme.material ? <Navbar title="Left Panel"></Navbar> : null}
-					<ContentBlock inner>
-						<p>Left panel content goes here</p>
-					</ContentBlock>
-					<ContentBlockTitle>Load page in panel</ContentBlockTitle>
-					<List>
-						<ListItem onClick={() => store.dispatch(navigateTo('/about/'))} title="About"></ListItem>
-						<ListItem onClick={() => store.dispatch(navigateTo('/about/'))} title="Form"></ListItem>
-					</List>
-					<ContentBlockTitle>Load page in main view</ContentBlockTitle>
-					<List>
-						<ListItem link="/about/" title="About" linkView="#main-view" linkClosePanel></ListItem>
-						<ListItem link="/form/" title="Form" linkView="#main-view" linkClosePanel></ListItem>
-					</List>
-				</Page>
-			</Pages>
-		</View>
-	</Panel>
-);
+export default function (props) {
 
-LeftPanel.contextTypes = {
-	framework7AppContext: PropTypes.object
+  // Framework7 parameters here
+  const f7params = {
+    id: 'io.framework7.testapp', // App bundle ID
+    name: 'Framework7', // App name
+    theme: 'auto', // Automatic theme detection
+    // App routes
+    routes,
+    // App Framework7 Redux state kernel
+    stateKernel
+  };
+
+  return (
+    <Provider store={store}>
+      <App params={f7params}>
+        {/* Statusbar */}
+        <Statusbar />
+
+        {/* Left Panel */}
+        <Panel left cover themeDark>
+          <View url="/panel-left/" />
+        </Panel>
+
+        {/* Right Panel */}
+        <Panel right reveal themeDark>
+          <View url="/panel-right/"/>
+        </Panel>
+
+        {/* Main View */}
+        <View id="main-view" url="/" main className="ios-edges"/>
+
+        {/* Popup */}
+        <Popup id="popup">
+          <View>
+            <Page>
+              <Navbar title="Popup">
+                <NavRight>
+                  <Link popupClose>Close</Link>
+                </NavRight>
+              </Navbar>
+              <Block>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, architecto. Cupiditate laudantium rem nesciunt numquam, ipsam. Voluptates omnis, a inventore atque ratione aliquam. Omnis iusto nemo quos ullam obcaecati, quod.</Block>
+            </Page>
+          </View>
+        </Popup>
+
+        {/* Login Screen */}
+        <LoginScreen id="login-screen">
+          <View>
+            <Page loginScreen>
+              <LoginScreenTitle>Login</LoginScreenTitle>
+              <List form>
+                <ListItem>
+                  <Label>Username</Label>
+                  <Input name="username" placeholder="Username" type="text"></Input>
+                </ListItem>
+                <ListItem>
+                  <Label>Password</Label>
+                  <Input name="password" type="password" placeholder="Password"></Input>
+                </ListItem>
+              </List>
+              <List>
+                <ListButton title="Sign In" loginScreenClose></ListButton>
+                <BlockFooter>
+                  <p>Click Sign In to close Login Screen</p>
+                </BlockFooter>
+              </List>
+            </Page>
+          </View>
+        </LoginScreen>
+      </App>
+    </Provider>
+  );
 };
-
-const RightPanel = (props, context) => (
-	<Panel right cover layout="dark">
-		<View id="right-panel-view" navbarThrough dynamicNavbar={true}>
-			{context.framework7AppContext.theme.ios ? <Navbar title="Right Panel" sliding /> : null}
-			<Pages>
-				<Page>
-					{context.framework7AppContext.theme.material ? <Navbar title="Right Panel" sliding /> : null}
-					<ContentBlock>
-						<p>Right panel content goes here</p>
-					</ContentBlock>
-					<ContentBlockTitle>Load page in panel</ContentBlockTitle>
-					<List>
-						<ListItem link="/about/" title="About"></ListItem>
-						<ListItem link="/form/" title="Form"></ListItem>
-					</List>
-					<ContentBlockTitle>Load page in main view</ContentBlockTitle>
-					<List>
-						<ListItem link="/about/" title="About" linkView="#main-view" linkClosePanel></ListItem>
-						<ListItem link="/form/" title="Form" linkView="#main-view" linkClosePanel></ListItem>
-					</List>
-				</Page>
-			</Pages>
-		</View>
-	</Panel>
-);
-
-RightPanel.contextTypes = {
-	framework7AppContext: PropTypes.object
-};
-
-const MainViews = (props, context) => {
-	return (
-		<Views>
-			<View id="main-view" navbarThrough dynamicNavbar={true} main url="/">
-				{/* Navbar */}
-				{context.framework7AppContext.theme.ios ? (
-					<Navbar>
-						<NavLeft>
-							<Link icon="icon-bars" openPanel="left" />
-						</NavLeft>
-						<NavCenter sliding>Framework7</NavCenter>
-						<NavRight>
-							<Link icon="icon-bars" openPanel="right"></Link>
-						</NavRight>
-					</Navbar>
-				) : null}
-				{/* Pages */}
-				<Pages>
-					<Page>
-						{context.framework7AppContext.theme.material ? (
-							<Navbar>
-								<NavLeft>
-									<Link icon="icon-bars" openPanel="left" />
-								</NavLeft>
-								<NavCenter sliding>Framework7</NavCenter>
-								<NavRight>
-									<Link icon="icon-bars" openPanel="right"></Link>
-								</NavRight>
-							</Navbar>
-						) : null}						
-						<ContentBlockTitle>Welcome to my App</ContentBlockTitle>
-						<ContentBlock inner>
-							<p>Duis sed erat ac eros ultrices pharetra id ut tellus. Praesent rhoncus enim ornare ipsum aliquet ultricies. Pellentesque sodales erat quis elementum sagittis.</p>
-						</ContentBlock>
-						<ContentBlockTitle>Navigation</ContentBlockTitle>
-						<List>
-							<ListItem onClick={() => store.dispatch(showPreloader())} title="Preloader"></ListItem>
-							<ListItem onClick={() => store.dispatch(showAlert('Hi there!', 'Greeting'))} title="Alert"></ListItem>							
-						</List>
-						<ContentBlockTitle>Side Panels</ContentBlockTitle>
-						<ContentBlock>
-							<GridRow>
-								<GridCol width={50}>
-									<Button openPanel="left">Left Panel</Button>
-								</GridCol>
-								<GridCol width={50}>
-									<Button openPanel="right">Right Panel</Button>
-								</GridCol>
-							</GridRow>
-						</ContentBlock>
-						<ContentBlockTitle>Modals</ContentBlockTitle>
-						<ContentBlock>
-							<GridRow>
-								<GridCol width={50}>
-									<Button openPopup="#popup">Popup</Button>
-								</GridCol>
-								<GridCol width={50}>
-									<Button openLoginScreen="#login-screen">Login Screen</Button>
-								</GridCol>
-							</GridRow>
-						</ContentBlock>
-					</Page>
-				</Pages>
-			</View>
-		</Views>
-	);
-};
-
-MainViews.contextTypes = {
-	framework7AppContext: PropTypes.object
-};
-
-const AppPopup = () => (
-	<Popup id="popup">
-		<View navbarFixed>
-			<Pages>
-				<Page>
-					<Navbar title="Popup">
-						<NavRight>
-							<Link closePopup>Close</Link>
-						</NavRight>
-					</Navbar>
-					<ContentBlock>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, architecto. Cupiditate laudantium rem nesciunt numquam, ipsam. Voluptates omnis, a inventore atque ratione aliquam. Omnis iusto nemo quos ullam obcaecati, quod.</ContentBlock>
-				</Page>
-			</Pages>
-		</View>
-	</Popup> 
-);
-
-const AppLoginScreen = () => (
-	<LoginScreen id="login-screen">
-		<View>
-			<Pages>
-				<Page loginScreen>
-					<LoginScreenTitle>Login</LoginScreenTitle>
-					<List form>
-						<ListItem>
-							<FormLabel>Username</FormLabel>
-							<FormInput name="username" placeholder="Username" type="text" />
-						</ListItem>
-						<ListItem>
-							<FormLabel>Password</FormLabel>
-							<FormInput name="password" type="password" placeholder="Password" />
-						</ListItem>
-					</List>
-					<List>
-						<ListButton title="Sign In" closeLoginScreen />
-						<ListLabel>
-							<p>Click Sign In to close Login Screen</p>
-						</ListLabel>
-					</List>
-				</Page>
-			</Pages>
-		</View>
-	</LoginScreen>
-);
-
-export const App = () => (	
-	<Provider>
-		<Framework7App themeType="ios" routes={routes} stateKernel={framework7StateKernel}>
-			<Statusbar />		
-			<LeftPanel />
-			<RightPanel />
-			<MainViews />
-			<AppPopup />
-			<AppLoginScreen />
-		</Framework7App>  
-	</Provider>
-);
