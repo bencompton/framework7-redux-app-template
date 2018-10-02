@@ -17,21 +17,23 @@ import {
 } from 'framework7-react';
 
 export default ({ 
-  goToAbout,
-  goToForm,
-  openLeftPanel,
-  openRightPanel,
-  openPopup,
-  openLoginScreen
+  onGoToAbout,
+  onGoToForm,
+  onGoToDynamicRoute,
+  onGoToDefaultRoute,
+  onOpenLeftPanel,
+  onOpenRightPanel,
+  onOpenPopup,
+  onOpenLoginScreen
 }) => (
   <Page>
     <Navbar>
       <NavLeft>
-        <Link iconIos="f7:menu" iconMd="material:menu" link onClick={openLeftPanel}></Link>
+        <Link iconIos="f7:menu" iconMd="material:menu" link onClick={onOpenLeftPanel}></Link>
       </NavLeft>
       <NavTitle>My App</NavTitle>
       <NavRight>
-        <Link iconIos="f7:menu" iconMd="material:menu" link onClick={openRightPanel}></Link>
+        <Link iconIos="f7:menu" iconMd="material:menu" link onClick={onOpenRightPanel}></Link>
       </NavRight>
     </Navbar>
     <Toolbar>
@@ -43,17 +45,17 @@ export default ({
     </Block>
     <BlockTitle>Navigation</BlockTitle>
     <List>
-      <ListItem onClick={goToAbout} title="About"></ListItem>
-      <ListItem onClick={goToForm} title="Form"></ListItem>
+      <ListItem link onClick={onGoToAbout} title="About"></ListItem>
+      <ListItem link onClick={onGoToForm} title="Form"></ListItem>
     </List>
     <BlockTitle>Modals</BlockTitle>
     <Block strong>
       <Row>
         <Col width="50">
-          <Button fill raised onClick={openPopup}>Popup</Button>
+          <Button fill raised onClick={onOpenPopup}>Popup</Button>
         </Col>
         <Col width="50">
-          <Button fill raised onClick={openLoginScreen}>Login Screen</Button>
+          <Button fill raised onClick={onOpenLoginScreen}>Login Screen</Button>
         </Col>
       </Row>
     </Block>
@@ -61,16 +63,16 @@ export default ({
     <Block strong>
       <Row>
         <Col width="50">
-          <Button fill raised onClick={openLeftPanel}>Left Panel</Button>
+          <Button fill raised onClick={onOpenLeftPanel}>Left Panel</Button>
         </Col>
         <Col width="50">
-          <Button fill raised onClick={openRightPanel}>Right Panel</Button>
+          <Button fill raised onClick={onOpenRightPanel}>Right Panel</Button>
         </Col>
       </Row>
     </Block>
     <List>
-      <ListItem link="/dynamic-route/blog/45/post/125/?foo=bar#about" title="Dynamic Route"></ListItem>
-      <ListItem link="/load-something-that-doesnt-exist/" title="Default Route (404)"></ListItem>
+      <ListItem link onClick={onGoToDynamicRoute} title="Dynamic Route"></ListItem>
+      <ListItem link onClick={onGoToDefaultRoute} title="Default Route (404)"></ListItem>
     </List>
   </Page>
 );

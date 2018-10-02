@@ -3,16 +3,17 @@
   "version": "3.0.0",
   "private": true,
   "dependencies": {
-    "framework7": "^3.0.1",
+    "framework7": "^3.4.0",
     "framework7-icons": "^0.9.1",
-    "framework7-react": "^3.0.1",
-    "framework7-redux": "file:../framework7-redux/",
+    "framework7-react": "^3.4.0",
+    "framework7-redux": "^3.0.0",
     "material-design-icons": "^3.0.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
     "react-scripts": "2.0.0-next.66cc7a90",
-    "redux": "^4.0.0"
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -20,8 +21,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "copy-fonts": "cpy node_modules/framework7-icons/fonts/*.* src/fonts && cpy node_modules/material-design-icons/iconfont/*.{eot,ttf,woff,woff2} src/fonts",
-    "postinstall": "npm run copy-fonts",
-    "update-f7-redux": "cd ../framework7-redux && gulp && cd ../framework7-redux-app-template/ && rm -rf node_modules/framework7-redux && npm install"
+    "postinstall": "npm run copy-fonts"
   },
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",

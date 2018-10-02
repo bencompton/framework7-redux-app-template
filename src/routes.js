@@ -1,10 +1,12 @@
 import HomeContainer from './containers/HomeContainer';
 import AboutContainer from './containers/AboutContainer';
-import FormPage from './components/pages/FormPage';
-import DynamicRoutePage from './components/pages/DynamicRoutePage';
-import NotFoundPage from './components/pages/NotFoundPage';
-import PanelLeftPage from './components/pages/PanelLeftPage';
-import PanelRightPage from './components/pages/PanelRightPage';
+import FormContainer from './containers/FormContainer';
+import DynamicRouteContainer from './containers/DynamicRouteContainer';
+import NotFoundContainer from './containers/DefaultRouteContainer';
+import PanelLeftContainer from './containers/PanelLeftContainer';
+import PanelRightContainer from './containers/PanelRightContainer';
+import LoginContainer from './containers/LoginContainer';
+import PopupContainer from './containers/PopupContainer';
 
 export default [
   {
@@ -13,11 +15,15 @@ export default [
   },
   {
     path: '/panel-left/',
-    component: PanelLeftPage,
+    panel: {
+      component: PanelLeftContainer,
+    },
   },
   {
     path: '/panel-right/',
-    component: PanelRightPage,
+    panel: {
+      component: PanelRightContainer,
+    },
   },
   {
     path: '/about/',
@@ -25,14 +31,26 @@ export default [
   },
   {
     path: '/form/',
-    component: FormPage,
+    component: FormContainer,
   },
   {
     path: '/dynamic-route/blog/:blogId/post/:postId/',
-    component: DynamicRoutePage,
+    component: DynamicRouteContainer,
+  },
+  {
+    path: '/login/',
+    loginScreen: {
+      component: LoginContainer
+    }
+  },
+  {
+    path: '/popup/',
+    popup: {
+      component: PopupContainer
+    }
   },
   {
     path: '(.*)',
-    component: NotFoundPage,
+    component: NotFoundContainer,
   },
 ];

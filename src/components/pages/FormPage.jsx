@@ -14,9 +14,9 @@ import {
   Block
 } from 'framework7-react';
 
-export default () => (
+export default ({ onGoBackToHomePage }) => (
   <Page>
-    <Navbar title="Form" backLink="Back" />
+    <Navbar title="Form" backLink="Back" onBackClick={onGoBackToHomePage} />
     <BlockTitle>Form Example</BlockTitle>
     <List form>
       <ListItem>

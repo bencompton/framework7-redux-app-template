@@ -5,7 +5,7 @@ export default class DynamicRoutePage extends Component {
   render() {
     return (
       <Page>
-        <Navbar title="Dynamic Route" backLink="Back" />
+        <Navbar title="Dynamic Route" backLink="Back" onBackClick={this.props.onGoBackToHomePage} />
         <Block strong>
           <ul>
             <li><b>Url:</b> {this.$f7route.url}</li>
@@ -29,7 +29,7 @@ export default class DynamicRoutePage extends Component {
           </ul>
         </Block>
         <Block strong>
-          <Link onClick={() => this.$f7router.back()}>Go back via Router API</Link>
+          <Link onClick={this.props.onGoBackToHomePage}>Go back to home page</Link>
         </Block>
       </Page>
     );
