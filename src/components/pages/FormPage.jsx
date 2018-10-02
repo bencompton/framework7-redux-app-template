@@ -14,72 +14,112 @@ import {
   Block
 } from 'framework7-react';
 
-export default ({ onGoBackToHomePage }) => (
+export default ({
+  onGoBackToHomePage,
+  onNameUpdated,
+  onEmailUpdated,
+  onUrlUpdated,
+  onPasswordUpdated,
+  onPhoneUpdated,
+  onGenderUpdated,
+  onBirthdateUpdated,
+  onToggleUpdated,
+  onSliderUpdated,
+  onTextAreaUpdated,
+  onResizableUpdated,
+  onCheckboxUpdated,
+
+  name,
+  email,
+  url,
+  password,
+  phone,
+  gender,
+  birthdate,
+  toggle,
+  slider,
+  textArea,
+  resizable,
+  checkboxGroup,
+  radioButtonsGroup,
+}) => (
   <Page>
     <Navbar title="Form" backLink="Back" onBackClick={onGoBackToHomePage} />
     <BlockTitle>Form Example</BlockTitle>
     <List form>
       <ListItem>
         <Label>Name</Label>
-        <Input type="text" placeholder="Name" />
+        <Input type="text" placeholder="Name" onChange={({ target}) => onNameUpdated(target.value)} value={name} />
       </ListItem>
       <ListItem>
         <Label>E-mail</Label>
-        <Input type="email" placeholder="E-mail" />
+        <Input type="email" placeholder="E-mail" onChange={({ target }) => onEmailUpdated(target.value)} value={email} />
       </ListItem>
       <ListItem>
         <Label>URL</Label>
-        <Input type="url" placeholder="URL" />
+        <Input type="url" placeholder="URL" onChange={({ target }) => onUrlUpdated(target.value)} value={url} />
       </ListItem>
       <ListItem>
         <Label>Password</Label>
-        <Input type="password" placeholder="Password" />
+        <Input type="password" placeholder="Password" onChange={({ target }) => onPasswordUpdated(target.value)} value={password} />
       </ListItem>
       <ListItem>
         <Label>Phone</Label>
-        <Input type="tel" placeholder="Phone" />
+        <Input type="tel" placeholder="Phone" onChange={({ target }) => onPhoneUpdated(target.value)} value={phone} />
       </ListItem>
       <ListItem>
         <Label>Gender</Label>
-        <Input type="select">
-          <option selected>Male</option>
-          <option>Female</option>
+        <Input type="select" value={gender} onChange={({ target }) => onGenderUpdated(target.value)}>
+          <option value={0}>Male</option>
+          <option value={1}>Female</option>
         </Input>
       </ListItem>
       <ListItem>
         <Label>Birth date</Label>
-        <Input type="date" placeholder="Birth date" value="2014-04-30" />
+        <Input type="date" placeholder="Birth date" onChange={({ target }) => onBirthdateUpdated(target.value)} value={birthdate} />
       </ListItem>
       <ListItem title="Toggle">
-        <Toggle slot="after" />
+        <Toggle slot="after" onToggleChange={onToggleUpdated} checked={toggle} />
       </ListItem>
       <ListItem>
         <Label>Slider</Label>
         <Input>
-          <Range min="0" max="100" value="50" step="1" label={true} />
+          <Range min="0" max="100" value={slider} step="1" label={true} onRangeChange={(value) => onSliderUpdated(value)} />
         </Input>
       </ListItem>
       <ListItem>
         <Label>Textarea</Label>
-        <Input type="textarea" placeholder="Bio"></Input>
+        <Input type="textarea" placeholder="Bio" onChange={({ target }) => onTextAreaUpdated(target.value)} value={textArea}></Input>
       </ListItem>
       <ListItem>
         <Label>Resizable</Label>
-        <Input type="textarea" placeholder="Bio" resizable></Input>
+        <Input type="textarea" placeholder="Bio" resizable onChange={({ target }) => onResizableUpdated(target.value)} value={resizable}></Input>
       </ListItem>
     </List>
 
     <BlockTitle>Checkbox group</BlockTitle>
     <List form>
         {Array.from(Array(3).keys()).map(n => (
-            <ListItem key={n} checkbox name="my-checkbox" value={n + 1} title={`Checkbox ${n + 1}`} />
+            <ListItem
+              key={n}
+              checkbox
+              name="my-checkbox"
+              value={n + 1}
+              title={`Checkbox ${n + 1}`}
+              onClick={() => onCheckboxUpdated(n)}
+              checked={checkboxGroup[`checkbox${n}`]}              
+            />
         ))}
     </List>
 
     <BlockTitle>Radio buttons group</BlockTitle>
     <List form>
         {Array.from(Array(3).keys()).map(n => (
-            <ListItem key={n} radio name="my-radio" checked={n === 0} value={n + 1} title={`Radio ${n + 1}`} />
+            <ListItem
+              key={n} radio name="my-radio"
+              checked={n === radioButtonsGroup}
+              value={n + 1} title={`Radio ${n + 1}`}
+            />
         ))}
     </List>
 
