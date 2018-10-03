@@ -2,6 +2,13 @@ import { connect } from 'react-redux'
 
 import DynamicRoutePage from '../components/pages/DynamicRoutePage';
 import { goBackToHomePage } from '../actions/DynamicRouteActions';
+import { getRouteInfo } from '../selectors/DynamicRouteSelectors';
+
+const mapStateToProps = (state) => {
+  return {
+    ...getRouteInfo(state)
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -9,4 +16,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(DynamicRoutePage);
+export default connect(mapStateToProps, mapDispatchToProps)(DynamicRoutePage);
