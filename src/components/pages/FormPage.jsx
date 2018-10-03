@@ -28,6 +28,7 @@ export default ({
   onTextAreaUpdated,
   onResizableUpdated,
   onCheckboxUpdated,
+  onRadioButtonUpdated,
 
   name,
   email,
@@ -84,7 +85,7 @@ export default ({
       <ListItem>
         <Label>Slider</Label>
         <Input>
-          <Range min="0" max="100" value={slider} step="1" label={true} onRangeChange={(value) => onSliderUpdated(value)} />
+          <Range min="0" max="100" value={slider} step="1" label={true} onRangeChanged={(value) => onSliderUpdated(value)} />
         </Input>
       </ListItem>
       <ListItem>
@@ -106,8 +107,8 @@ export default ({
               name="my-checkbox"
               value={n + 1}
               title={`Checkbox ${n + 1}`}
-              onClick={() => onCheckboxUpdated(n)}
-              checked={checkboxGroup[`checkbox${n}`]}              
+              onClick={() => onCheckboxUpdated(n + 1)}
+              checked={checkboxGroup[`checkbox${n + 1}`]}              
             />
         ))}
     </List>
@@ -119,6 +120,7 @@ export default ({
               key={n} radio name="my-radio"
               checked={n === radioButtonsGroup}
               value={n + 1} title={`Radio ${n + 1}`}
+              onClick={() => onRadioButtonUpdated(n)}
             />
         ))}
     </List>

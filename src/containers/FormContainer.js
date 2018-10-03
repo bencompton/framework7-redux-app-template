@@ -14,7 +14,8 @@ import {
   sliderUpdated,
   textAreaUpdated,
   resizableUpdated,
-  checkboxUpdated
+  checkboxUpdated,
+  radioButtonUpdated
 } from '../actions/FormActions';
 import { getFormData } from '../selectors/FormSelectors';
 
@@ -37,6 +38,7 @@ const mapDispatchToProps = (dispatch) => {
     onTextAreaUpdated: (text) => dispatch(textAreaUpdated(text)),
     onResizableUpdated: (text) => dispatch(resizableUpdated(text)),
     onCheckboxUpdated: (checkbox) => dispatch(checkboxUpdated(checkbox)),
+    onRadioButtonUpdated: (radioButton) => dispatch(radioButtonUpdated(radioButton))
   };
 };
 

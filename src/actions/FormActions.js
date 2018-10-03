@@ -61,3 +61,8 @@ export const checkboxUpdated = (checkbox) => ({
     type: 'FORM_CHECKBOX_UPDATED',
     payload: checkbox
 });
+
+export const radioButtonUpdated = (radioButton) => ({
+    type: 'FORM_RADIO_BUTTON_UPDATED',
+    payload: radioButton
+});
