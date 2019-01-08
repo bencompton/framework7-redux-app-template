@@ -5,7 +5,7 @@ import { closePanelRight, goToAboutPageFromRightPanel, goToFormPageFromRightPane
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onClosePaneRight: () => dispatch(closePanelRight()),
+    onClosePanelRight: () => dispatch(closePanelRight()),
     onGoToAbout: () => dispatch(goToAboutPageFromRightPanel()),
     onGoToForm: () => dispatch(goToFormPageFromRightPanel()),
   };
