@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Page, Navbar, Block, Link } from 'framework7-react';
 
 export default ({ onGoBackToHomePage, url, path, hash, query }) => (
