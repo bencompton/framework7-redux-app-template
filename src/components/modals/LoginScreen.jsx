@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Page, LoginScreen, LoginScreenTitle, List, ListItem, Label, Input, ListButton, BlockFooter } from 'framework7-react';
+import { View, Page, LoginScreen, LoginScreenTitle, List, ListInput, ListButton, BlockFooter } from 'framework7-react';
 
 export default ({ onUsernameUpdated, onPasswordUpdated, onLogin, username, password }) => (
   <LoginScreen id="login-screen">
@@ -7,26 +7,22 @@ export default ({ onUsernameUpdated, onPasswordUpdated, onLogin, username, passw
       <Page loginScreen>
         <LoginScreenTitle>Login</LoginScreenTitle>
         <List form>
-          <ListItem>
-            <Label>Username</Label>
-            <Input
-              name="username"
-              placeholder="Username"
-              type="text"
-              onChange={({ target }) => onUsernameUpdated(target.value)}
-              value={username} 
-            />
-          </ListItem>
-          <ListItem>
-            <Label>Password</Label>
-            <Input
-              name="password"
-              type="password"
-              placeholder="Password"
-              onChange={({ target }) => onPasswordUpdated(target.value)}
-              value={password}
-            />
-          </ListItem>
+          <ListInput
+                  type="text"
+                  name="username"
+                  placeholder="username any..."
+                  info="Your username"
+                  value={username} 
+                  onInput={({ target }) => onUsernameUpdated(target.value)}
+                ></ListInput>
+                <ListInput
+                  type="password"
+                  name="password"
+                  placeholder="password!"
+                  info="Your password"
+                  value={password}
+                  onInput={({ target }) => onPasswordUpdated(target.value)}
+                ></ListInput>            
         </List>
         <List>
           <ListButton title="Sign In" onClick={onLogin}></ListButton>

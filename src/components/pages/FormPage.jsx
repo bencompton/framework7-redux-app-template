@@ -4,8 +4,7 @@ import {
   Navbar,
   List,
   ListItem,
-  Input,
-  Label,
+  ListInput,
   Toggle,
   BlockTitle,
   Row,
@@ -48,54 +47,93 @@ export default ({
     <Navbar title="Form" backLink="Back" onBackClick={onGoBackToHomePage} />
     <BlockTitle>Form Example</BlockTitle>
     <List form>
-      <ListItem>
-        <Label>Name</Label>
-        <Input type="text" placeholder="Name" onChange={({ target}) => onNameUpdated(target.value)} value={name} />
-      </ListItem>
-      <ListItem>
-        <Label>E-mail</Label>
-        <Input type="email" placeholder="E-mail" onChange={({ target }) => onEmailUpdated(target.value)} value={email} />
-      </ListItem>
-      <ListItem>
-        <Label>URL</Label>
-        <Input type="url" placeholder="URL" onChange={({ target }) => onUrlUpdated(target.value)} value={url} />
-      </ListItem>
-      <ListItem>
-        <Label>Password</Label>
-        <Input type="password" placeholder="Password" onChange={({ target }) => onPasswordUpdated(target.value)} value={password} />
-      </ListItem>
-      <ListItem>
-        <Label>Phone</Label>
-        <Input type="tel" placeholder="Phone" onChange={({ target }) => onPhoneUpdated(target.value)} value={phone} />
-      </ListItem>
-      <ListItem>
-        <Label>Gender</Label>
-        <Input type="select" value={gender} onChange={({ target }) => onGenderUpdated(target.value)}>
-          <option value={0}>Male</option>
-          <option value={1}>Female</option>
-        </Input>
-      </ListItem>
-      <ListItem>
-        <Label>Birth date</Label>
-        <Input type="date" placeholder="Birth date" onChange={({ target }) => onBirthdateUpdated(target.value)} value={birthdate} />
-      </ListItem>
-      <ListItem title="Toggle">
+      <ListInput
+        label="Name"
+        type="text"
+        placeholder="Name"
+        onChange={({ target}) => onNameUpdated(target.value)} 
+        value={name} 
+      ></ListInput>
+
+      <ListInput
+        label="E-mail"
+        type="email"
+        placeholder="E-mail"
+        onChange={({ target }) => onEmailUpdated(target.value)} 
+        value={email} 
+      ></ListInput>
+
+      <ListInput
+        label="URL"
+        type="url"
+        placeholder="URL"
+        onChange={({ target }) => onUrlUpdated(target.value)} 
+        value={url} 
+      ></ListInput>
+
+      <ListInput
+        label="Password"
+        type="password"
+        placeholder="Password"
+        onChange={({ target }) => onPasswordUpdated(target.value)} 
+        value={password} 
+      ></ListInput>
+
+      <ListInput
+        label="Phone"
+        type="tel"
+        placeholder="Phone"
+        onChange={({ target }) => onPhoneUpdated(target.value)} 
+        value={phone} 
+      ></ListInput>
+
+      <ListInput
+        label="Gender"
+        type="select"
+        value={gender} 
+        onChange={({ target }) => onGenderUpdated(target.value)}
+        >
+        <option value={0}>Male</option>
+        <option value={1}>Female</option>
+      </ListInput>
+
+      <ListInput
+        label="Birth date"
+        type="date"
+        placeholder="Birth day"
+        defaultValue="2014-04-30"
+        onChange={({ target }) => onBirthdateUpdated(target.value)} 
+        value={birthdate} 
+      ></ListInput>
+
+      <ListItem
+        title="Toggle"
+      >
         <Toggle slot="after" onToggleChange={onToggleUpdated} checked={toggle} />
       </ListItem>
-      <ListItem>
-        <Label>Slider</Label>
-        <Input>
-          <Range min="0" max="100" value={slider} step="1" label={true} onRangeChanged={(value) => onSliderUpdated(value)} />
-        </Input>
-      </ListItem>
-      <ListItem>
-        <Label>Textarea</Label>
-        <Input type="textarea" placeholder="Bio" onChange={({ target }) => onTextAreaUpdated(target.value)} value={textArea}></Input>
-      </ListItem>
-      <ListItem>
-        <Label>Resizable</Label>
-        <Input type="textarea" placeholder="Bio" resizable onChange={({ target }) => onResizableUpdated(target.value)} value={resizable}></Input>
-      </ListItem>
+
+      <ListInput
+        label="Range"
+        input={false}
+      >
+        <Range slot="input" min={0} max={100} step={1} value={slider} label={true} onRangeChanged={(value) => onSliderUpdated(value)} />
+      </ListInput>
+
+      <ListInput
+        type="textarea"
+        label="Textarea"
+        placeholder="Bio"
+        onChange={({ target }) => onTextAreaUpdated(target.value)} 
+        value={textArea}
+      ></ListInput>
+      <ListInput
+        type="textarea"
+        label="Resizable"
+        placeholder="Bio"
+        resizable
+        onChange={({ target }) => onResizableUpdated(target.value)} 
+        value={resizable}>
+      ></ListInput>
     </List>
 
     <BlockTitle>Checkbox group</BlockTitle>
@@ -159,6 +197,6 @@ export default ({
         <Button className="col" big fill raised color="red">Big Red</Button>
         <Button className="col" big fill raised color="green">Big Green</Button>
       </Row>
-    </Block>
+    </Block> 
   </Page>
 );
